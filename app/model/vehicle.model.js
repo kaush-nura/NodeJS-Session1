@@ -3,7 +3,7 @@
 module.exports=(sequelize,Sequelize)=>{
     const vehicle=sequelize.define("vehicle",{
 
-        id:{
+        vehi_id:{
             type:Sequelize.INTEGER,
             allowNull:false,
             unique:true,
@@ -11,7 +11,8 @@ module.exports=(sequelize,Sequelize)=>{
             autoIncrement:true
         },
         vehi_type:{
-            type:Sequelize.STRING(20),
+            type:Sequelize.ENUM('CAR','VAN','NUS'),
+            defaultValue:"CAR",
             unique:false,
             allowNull:false,
         },

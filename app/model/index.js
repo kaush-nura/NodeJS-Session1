@@ -32,8 +32,32 @@ sequelize
 
 db.user=require("./user.model")(sequelize ,Sequelize);
 db.role=require("./role.model")(sequelize ,Sequelize);
-db.userdet=require("./userdetail.model")(sequelize ,Sequelize);
+db.userdetail=require("./userdetail.model")(sequelize ,Sequelize);
 db.vehicle=require("./vehicle.model")(sequelize ,Sequelize);
+
+
+//many to many relationship between user -role M:M (create a intermediate table "user_role" it has both id)
+db.user.belongsToMany(db.role,{
+    through:"user_role",
+    as:"roles",
+    foreignkey:"role_id",
+});
+
+db.role.belongsToMany(db.user,{
+    through:"user_role",
+    as:"users",
+    foreignkey:"user_id",
+});
+
+//one to many relatiopnship between user-vehicle 1:M (vehicle table has user table ID field)
+db.user.hasMany(db.vehicle);
+db.vehicle.belongsTo(db.user);
+
+
+//one to one relationship user - userdetails 1:1 (userdetails table has user table ID field)
+db.user.hasOne(db.userdetail,{});
+db.userdetail.belongsTo(db.user);
+
 
 
 module.exports=db;
