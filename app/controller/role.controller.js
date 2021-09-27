@@ -93,7 +93,7 @@ exports.deleteRole= async(req,res)=>{
 
     await Role.destroy({
         where: {
-          id: req.body.id,}})          
+          id: req.params.id}})          
           .then(data => {
             if (data.length != 0) {
                 res.status(200).send(data);

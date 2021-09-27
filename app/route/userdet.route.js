@@ -6,6 +6,6 @@ router.get('/',userDetController.getAllUsrDet);
 router.get('/:id',userDetController.getSingleUsrDet);
 router.post('/',userDetController.createUsrDet);
 router.put('/',userDetController.updateUsrDet);
-router.delete('/',userDetController.deleteUsrDet);
+router.delete('/:id',userDetController.deleteUsrDet);
 
 module.exports=router;

@@ -1,4 +1,7 @@
+require('dotenv').config();
 const db=require('../model');
+const bcrypt=require('bcrypt');
+const saltRounds=10;
 const User=db.user;
 
 exports.getAllUsers=(req,res)=>{
@@ -42,9 +45,13 @@ exports.getSingleUser=(req,res)=>{
 }
 
 exports.createUser=async (req,res)=>{
-    const user = {
+
+    const password=req.body.password;
+    const encryptPassword=await bcrypt.hash(password,saltRounds);
+
+    const user = { 
         username: req.body.username,
-        password: req.body.password,
+        password: encryptPassword,
     }
     await User.create(user)
         .then(data => {
@@ -90,10 +97,10 @@ exports.updateUser= async(req,res)=>{
 }
 
 exports.deleteUser= async(req,res)=>{
-
+   // const id = req.params.id;
     await User.destroy({
         where: {
-          id: req.body.id,}})          
+          id: req.params.id}})          
           .then(data => {
             if (data.length != 0) {
                 res.status(200).send(data);

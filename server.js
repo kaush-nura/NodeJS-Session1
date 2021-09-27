@@ -6,6 +6,7 @@ const userRoute=require("./app/route/user.route");
 const roleRoute=require("./app/route/role.route");
 const vehiRoute=require("./app/route/vehicle.route");
 const udetRoute=require("./app/route/userdet.route");
+const authRoute=require("./app/route/auth.route");
 
 const app=express();
 
@@ -19,10 +20,16 @@ db.sequelize.sync({force:false})
 })
 
 
+
+const { veryfyToken } = require ('./app/middleware/auth.middleware')
+
+
 app.use('/user',userRoute)
 app.use('/role',roleRoute)
-app.use('/vehi',vehiRoute)
+//app.use('/vehi',vehiRoute)
+app.use('/vehi',vehiRoute);
 app.use('/ud',udetRoute)
+app.use('/auth',authRoute)
 
 const PORT =3003;
 app.listen(PORT,()=>{

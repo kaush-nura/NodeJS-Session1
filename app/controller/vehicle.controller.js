@@ -21,9 +21,9 @@ exports.getAllVehi=(req,res)=>{
 }
 
 exports.getSingleVehi=(req,res)=>{
-    const vehi_id = req.params.vehi_id;
+    const id = req.params.id;
 
-    Vehicle.findByPk(vehi_id)
+    Vehicle.findByPk(id)
         .then(data => {
             if (data.length != 0) {
                 res.status(200).send(data);
@@ -93,8 +93,10 @@ exports.deleteVehi= async(req,res)=>{
 
     await Vehicle.destroy({
         where: {
-            vehi_id: req.body.vehi_id,}})          
+            vehi_id: req.params.id}})          
           .then(data => {
+
+
             if (data.length != 0) {
                 res.status(200).send(data);
             } else {

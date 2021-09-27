@@ -101,7 +101,7 @@ exports.deleteUsrDet= async(req,res)=>{
 
     await UsrDet.destroy({
         where: {
-          id: req.body.id,}})          
+          id: req.params.id}})          
           .then(data => {
             if (data.length != 0) {
                 res.status(200).send(data);
