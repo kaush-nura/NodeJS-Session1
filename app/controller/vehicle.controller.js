@@ -71,7 +71,7 @@ exports.updateVehi= async(req,res)=>{
     }
     await Vehicle.update(
         vehicle, {
-        where: { vehi_id: req.body.vehi_id, }})
+        where: { vehi_id: req.body.vehi_id}})
         .then(data => {
             if (data.length != 0) {
                 res.status(200).send(data);
@@ -90,12 +90,11 @@ exports.updateVehi= async(req,res)=>{
 }
 
 exports.deleteVehi= async(req,res)=>{
-
     await Vehicle.destroy({
         where: {
             vehi_id: req.params.id}})          
           .then(data => {
-
+               
 
             if (data.length != 0) {
                 res.status(200).send(data);
